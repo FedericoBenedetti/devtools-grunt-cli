@@ -1,5 +1,8 @@
 {
-    "version": "2.0.0",
-    "command": "grunt",
-    "type": "shell"
+    "taskName": "run-time.compilation",
+    "isBuildCommand": true,
+    "command": "tsc",
+    "type": "shell",
+    "args": ["-p" , "."],
+    "problemMatcher": "$tsc"
 }
