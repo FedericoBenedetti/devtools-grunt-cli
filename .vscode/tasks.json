@@ -1,0 +1,14 @@
+{
+    "version": "0.1.0",
+    "command": "grunt",
+    "isShellCommand": true,
+    "args": [
+        "--no-color"
+    ],
+    "tasks": [
+        {
+            "taskName": "ts-compile",
+            "isBuildCommand": true
+        }
+    ]
+}
