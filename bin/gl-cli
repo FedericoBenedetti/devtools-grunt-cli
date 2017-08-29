@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+'use strict';
+
+// Nodejs libs.
+var path = require('path');
+
+// External libs.
+var hooker = require('hooker');
+
+// Get the path to an asset, relative to this module's root directory.
+var asset = path.resolve.bind(null, __dirname, '..');
+
+// Project metadata.
+var pkg = require(asset('package.json'));
+
+// Grunt.
+var grunt = require('grunt');
+
+// Hook into grunt.task.init to load the built-in init task.
+hooker.hook(grunt.task, 'init', function() {
+    grunt.task.loadTasks(asset('tasks'));
+  });
+  
+  grunt.cli();
