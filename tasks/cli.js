@@ -3,12 +3,11 @@
 
 module.exports = function (grunt) {
 
-  // Nodejs libs.
   var path = require('path');
 
   grunt.template.addDelimiters('init', '{%', '%}');
 
-  grunt.registerInitTask('init', 'Generate project scaffolding from a template.', function () {
+  grunt.registerInitTask('init', 'Grunt plugin to easily generate predefined templates for different type of works.', function () {
     var args = grunt.util.toArray(arguments);
 
     console.log("args: " + args);

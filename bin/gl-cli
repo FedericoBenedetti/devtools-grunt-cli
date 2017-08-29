@@ -17,4 +17,23 @@ hooker.hook(grunt.task, 'init', function () {
 
 grunt.cli.tasks = ['init'];
 
+grunt.help.queue = [
+  'header',
+  'usage',
+  'footer'
+];
+
+grunt.help.header = function() {
+  grunt.log.writeln('gl-cli: grunt plugin to easily generate predefined templates for different type of works. (v' + pkg.version + ')');
+};
+
+grunt.help.usage = function() {
+  grunt.log.header('Usage');
+  grunt.log.writeln(' ' + path.basename(process.argv[1]) + ' [options] [template]');
+};
+
+grunt.help.footer = function() {
+  grunt.log.writeln().writeln('For more information, see https://git.loccioni.com/IT/devtools/gl-grunt-project-cli');
+};
+
 grunt.cli();
