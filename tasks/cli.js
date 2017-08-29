@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     grunt.help.usage();
     grunt.help.footer();
 
-    console.log("\n\n\t-: arguments " + args[0]);
+    console.log("\n\n\t-: arguments " + args);
 
   });
 
