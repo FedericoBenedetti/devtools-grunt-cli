@@ -1,8 +1,0 @@
-{
-    "name": "gl-grunt-project-cli",
-    "dependencies": {},
-    "globalDevDependencies": {
-        "gruntjs": "registry:dt/gruntjs#0.4.0+20160602153508",
-        "node": "registry:dt/node#6.0.0+20161121110008"
-    }
-}

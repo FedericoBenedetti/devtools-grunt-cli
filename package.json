@@ -30,7 +30,6 @@
     "grunt-contrib-nodeunit": "1.0.0",
     "grunt-git": "^1.0.6",
     "grunt-shell": "2.1.0",
-    "grunt-typings": "^0.1.5",
     "hooker": "^0.2.3",
     "load-grunt-tasks": "^3.5.2",
     "typescript": "2.1.6"
