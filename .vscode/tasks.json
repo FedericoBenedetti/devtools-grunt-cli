@@ -4,6 +4,9 @@
     "isBuildCommand": true,
     "command": "tsc",
     "type": "shell",
-    "args": ["-p" , "."],
+    "args": [
+        "-p",
+        "."
+    ],
     "problemMatcher": "$tsc"
 }
