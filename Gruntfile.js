@@ -2,6 +2,7 @@
 
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
+    require('grunt-log-headers')(grunt);
 
     grunt.initConfig({
         jshint: {
@@ -13,7 +14,7 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             }
-        }
+        },
 
     });
 

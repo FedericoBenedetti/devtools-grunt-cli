@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 'use strict';
-
 var path = require('path');
 var hooker = require('hooker');
 
@@ -29,13 +28,17 @@ grunt.help.header = function() {
 };
 
 grunt.help.usage = function() {
-  grunt.log.header(' Usage');
+  grunt.log.header(' Usage: ');
   grunt.log.writeln('\n ' + path.basename(process.argv[1]) + ' [options] [template]');
+  grunt.log.header('\n Options available: ');
+  grunt.log.writeln('\n web \t\t-: web template');
+  grunt.log.writeln(' desktop \t-: desktop template');
+
 };
 
 grunt.help.footer = function() {
-  grunt.log.writeln().writeln(' For more information, see ' + 
-                              '\n\n\t\t https://git.loccioni.com/IT/devtools/gl-grunt-project-cli');
+  grunt.log.header(' For more information, see: ');
+  grunt.log.writeln('\n\t\thttps://git.loccioni.com/IT/devtools/gl-grunt-project-cli');
 };
 
 grunt.cli();
