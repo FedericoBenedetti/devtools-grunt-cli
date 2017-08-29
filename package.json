@@ -29,7 +29,6 @@
     "grunt-contrib-jshint": "1.1.0",
     "grunt-contrib-nodeunit": "1.0.0",
     "grunt-git": "^1.0.6",
-    "grunt-log-headers": "^1.0.2",
     "grunt-shell": "2.1.0",
     "grunt-typings": "^0.1.5",
     "hooker": "^0.2.3",
