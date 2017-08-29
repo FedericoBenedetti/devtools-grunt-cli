@@ -18,9 +18,5 @@ module.exports = function (grunt) {
     });
 
     grunt.task.loadTasks('tasks');
-
-    grunt.loadNpmTasks('grunt-zip');
-    grunt.loadNpmTasks('grunt-contrib-rename');
-
     grunt.registerTask('default', ['jshint']);
 };
