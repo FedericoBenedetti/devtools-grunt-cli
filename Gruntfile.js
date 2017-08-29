@@ -1,5 +1,9 @@
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
+
+    grunt.loadNpmTasks('grunt-zip');
+    grunt.loadNpmTasks('grunt-contrib-rename');
+
     grunt.task.loadTasks('tasks');
 
     grunt.initConfig({
@@ -13,15 +17,18 @@ module.exports = function (grunt) {
                 jshintrc: '.jshintrc'
             }
         },
-        typings: {
-            install: {}
+        unzip: {
+            'out': 'templates/gui-template.zip'
         },
-        unzip_template: {
-            path: 'templates/'
+        
+        rename: {
+            main: {
+                files: [
+                    { src: ['out/gui-project-template.sln'], dest: 'out/' + grunt.option("title") + '.sln'},
+                ]
+            }
         }
     });
 
-    grunt.registerTask('test', ['jshint']);
-
-    grunt.registerTask('default', ['test']);
+    grunt.registerTask('default', ['jshint', 'unzip', 'rename', 'modify_template']);
 };

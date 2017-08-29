@@ -1,8 +1,7 @@
 {
-  "name": "@gl-grunt-template-creator",
+  "name": "@IT/devtool/gl-grunt-project-cli",
   "version": "1.0.0",
   "description": "grunt plugin to easily generate predefined templates for different type of works",
-  "main": "tasks/gl-grunt-template-creator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,7 +23,11 @@
     "grunt-git": "^1.0.6",
     "grunt-shell": "2.1.0",
     "grunt-typings": "^0.1.5",
-    "load-grunt-tasks": "3.5.2",
+    "load-grunt-tasks": "^3.5.2",
     "typescript": "2.1.6"
+  },
+  "dependencies": {
+    "@types/grunt": "^0.4.22",
+    "@types/node": "^8.0.25"
   }
 }
