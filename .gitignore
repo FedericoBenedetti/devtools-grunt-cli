@@ -1,3 +1,3 @@
 node_modules
-tasks/a.js
-tasks/a.js.map
+tasks/*.js
+tasks/*.js.map
