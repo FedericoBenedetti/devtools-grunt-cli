@@ -1,5 +1,5 @@
 {
-  "name": "@IT/devtool/gl-grunt-project-cli",
+  "name": "@it/devtool/gl-grunt-project-cli",
   "version": "1.0.0",
   "description": "grunt plugin to easily generate predefined templates for different type of works",
   "scripts": {

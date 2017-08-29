@@ -5,6 +5,7 @@ module.exports = (grunt: IGrunt) => {
 
         if (param_web) {
             console.log("param_web: " + param_web);
+
         } else if (param_desktop) {
             console.log("param_web: " + param_web);
         }

@@ -17,17 +17,19 @@ module.exports = function (grunt) {
                 jshintrc: '.jshintrc'
             }
         },
+
         unzip: {
             'out': 'templates/gui-template.zip'
         },
-        
+
         rename: {
             main: {
                 files: [
-                    { src: ['out/gui-project-template.sln'], dest: 'out/' + grunt.option("title") + '.sln'},
+                    { src: ['out/gui-project-template.sln'], dest: 'out/' + grunt.option("title") + '.sln' },
                 ]
             }
-        }
+        },
+
     });
 
     grunt.registerTask('default', ['jshint', 'unzip', 'rename', 'modify_template']);
