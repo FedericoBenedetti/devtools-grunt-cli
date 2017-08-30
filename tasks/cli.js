@@ -1,20 +1,23 @@
 class TemplateWeb {
     execute() {
         let tasks = [];
-        tasks.push('shell:web');
+        tasks.push('unzip:unzip_template');
+        tasks.push('move:web');
         return tasks;
     }
 }
 class TemplateDesktop {
     execute() {
         let tasks = [];
+        tasks.push('unzip:unzip_template');
+        tasks.push('move:desktop');
         return tasks;
     }
 }
 module.exports = (grunt) => {
     var path = require('path');
-    var _pjtitle;
     var _map;
+    var _taskToExecute = [];
     grunt.template.addDelimiters('init', '{%', '%}');
     grunt.registerTask('generate-folder', 'Easily generate predefined templates for different type of works.', function () {
         var args = process.argv;
@@ -47,15 +50,13 @@ module.exports = (grunt) => {
         }
     });
     function setTitle(title) {
-        _pjtitle = title;
-        console.log("\n LOG: template name: " + "'" + _pjtitle + "'");
+        console.log("\n LOG: template name: " + "'" + title + "'");
     }
     function executeTasks(type) {
-        let taskToExecute;
         console.log("\n LOG: type of task: '" + type + "'");
-        taskToExecute = _map.get(type).execute();
-        console.log("\n LOG: command that is being executed: " + taskToExecute);
-        grunt.task.run('shell:web');
+        _taskToExecute = _map.get(type).execute();
+        console.log("\n LOG: command that is being executed: " + _taskToExecute);
+        grunt.task.run(_taskToExecute);
     }
 };
 //# sourceMappingURL=cli.js.map

@@ -10,8 +10,8 @@ interface ITemplate {
 class TemplateWeb implements ITemplate {
     execute() {
         let tasks: string[] = [];
-
-        tasks.push('shell:web');
+        tasks.push('unzip:unzip_template');
+        tasks.push('move:web');
         return tasks;
     }
 }
@@ -19,6 +19,8 @@ class TemplateWeb implements ITemplate {
 class TemplateDesktop implements ITemplate {
     execute() {
         let tasks: string[] = [];
+        tasks.push('unzip:unzip_template');
+        tasks.push('move:desktop');
         return tasks;
     }
 }
@@ -27,8 +29,9 @@ module.exports = (grunt: IGrunt) => {
 
     var path = require('path');
 
-    var _pjtitle: string;
     var _map: Map<string, ITemplate>;
+    var _taskToExecute: string[] = [];
+
 
     grunt.template.addDelimiters('init', '{%', '%}');
 
@@ -73,17 +76,15 @@ module.exports = (grunt: IGrunt) => {
     });
 
     function setTitle(title: string) {
-        _pjtitle = title;
-        console.log("\n LOG: template name: " + "'" + _pjtitle + "'");
+        console.log("\n LOG: template name: " + "'" + title + "'");
     }
 
     function executeTasks(type: string) {
-        let taskToExecute;
         console.log("\n LOG: type of task: '" + type + "'");
 
-        taskToExecute = _map.get(type).execute()
-        console.log("\n LOG: command that is being executed: " + taskToExecute);
+        _taskToExecute = _map.get(type).execute();
+        console.log("\n LOG: command that is being executed: " + _taskToExecute);
 
-        grunt.task.run('shell:web');
+        grunt.task.run(_taskToExecute);
     }
 };
