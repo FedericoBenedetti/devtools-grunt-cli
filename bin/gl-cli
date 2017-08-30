@@ -6,8 +6,6 @@ var path = require("path");
 
 var asset = path.resolve.bind(null, __dirname, "..");
 
-var pkg = require(asset("package.json"));
-
 var grunt = require("grunt");
 
 grunt.cli.tasks = ["generate-folder"];
@@ -17,12 +15,12 @@ grunt.help.queue = [
   "footer"
 ];
 
-grunt.help.header = function() {
+grunt.help.header = function () {
   grunt.log.header("\n gl-cli: ");
   grunt.log.writeln("\n grunt plugin to easily generate predefined templates for different type of works.");
 };
 
-grunt.help.usage = function() {
+grunt.help.usage = function () {
   grunt.log.header(" Usage: ");
   grunt.log.writeln("\n " + path.basename(process.argv[1]) + " [options] [template name]");
   grunt.log.header("\n Options available: ");
@@ -32,18 +30,18 @@ grunt.help.usage = function() {
 
 };
 
-grunt.help.footer = function() {
+grunt.help.footer = function () {
   grunt.log.header(" For more information, see: ");
   grunt.log.writeln(" \n\t\thttps://git.loccioni.com/IT/devtools/gl-grunt-project-cli\n\n");
 };
 
-grunt.help.log = function() {
+grunt.help.log = function () {
   grunt.log.header("\n Logs: ");
 }
 
 grunt.options = {
-  gruntfile : asset("Gruntfile.js"),
-  cwd : process.cwd(),
+  gruntfile: asset("Gruntfile.js"),
+  cwd: process.cwd(),
   pjtitle: process.argv[3]
 }
 
