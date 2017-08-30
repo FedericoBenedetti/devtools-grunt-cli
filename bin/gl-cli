@@ -1,44 +1,49 @@
 #!/usr/bin/env node
 
-'use strict';
-var path = require('path');
-var hooker = require('hooker');
+"use strict";
 
-var asset = path.resolve.bind(null, __dirname, '..');
+var path = require("path");
 
-var pkg = require(asset('package.json'));
+var asset = path.resolve.bind(null, __dirname, "..");
 
-var grunt = require('grunt');
+var pkg = require(asset("package.json"));
 
-hooker.hook(grunt.task, 'init', function () {
-  grunt.task.loadTasks(asset('tasks'));
-});
+var grunt = require("grunt");
 
-grunt.cli.tasks = ['init'];
-
+grunt.cli.tasks = ["generate-folder"];
 grunt.help.queue = [
-  'header',
-  'usage',
-  'footer'
+  "header",
+  "usage",
+  "footer"
 ];
 
 grunt.help.header = function() {
-  grunt.log.header('\n gl-cli: ');
-  grunt.log.writeln('\n grunt plugin to easily generate predefined templates for different type of works.');
+  grunt.log.header("\n GL-CLI HELP: ");
+  grunt.log.writeln("\n grunt plugin to easily generate predefined templates for different type of works.");
 };
 
 grunt.help.usage = function() {
-  grunt.log.header(' Usage: ');
-  grunt.log.writeln('\n ' + path.basename(process.argv[1]) + ' [options] [template]');
-  grunt.log.header('\n Options available: ');
-  grunt.log.writeln('\n web \t\t-: web template');
-  grunt.log.writeln(' desktop \t-: desktop template');
+  grunt.log.header(" Usage: ");
+  grunt.log.writeln("\n " + path.basename(process.argv[1]) + " [options] [template name]");
+  grunt.log.header("\n Options available: ");
+  grunt.log.writeln("\n web \t\t-: web template");
+  grunt.log.writeln(" desktop \t-: desktop template");
+  grunt.log.writeln(" help/h \t-: help");
 
 };
 
 grunt.help.footer = function() {
-  grunt.log.header(' For more information, see: ');
-  grunt.log.writeln('\n\t\thttps://git.loccioni.com/IT/devtools/gl-grunt-project-cli');
+  grunt.log.header(" For more information, see: ");
+  grunt.log.writeln(" \n\t\thttps://git.loccioni.com/IT/devtools/gl-grunt-project-cli\n\n");
 };
 
-grunt.cli();
+grunt.help.log = function() {
+  grunt.log.header("\n Logs: ");
+}
+
+grunt.options = {
+  gruntfile : asset("Gruntfile.js"),
+  cwd : process.cwd()
+}
+
+grunt.cli(grunt.options);
