@@ -1,13 +1,16 @@
 'use strict';
 
+// Get working directory: <%= grunt.options.cwd %>
+
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
+    grunt.task.loadTasks('tasks');
 
     grunt.initConfig({
         jshint: {
             all: [
                 'Gruntfile.js',
-                'tasks/*.js',
+                'tasks/*.ts',
                 'bin/gl-cli'
             ],
             options: {
@@ -15,8 +18,18 @@ module.exports = function (grunt) {
             }
         },
 
+        shell: {
+            web: {
+                command: ''
+
+            },
+
+            desktop: {
+                command: ''
+            }
+        }
+
     });
 
-    grunt.task.loadTasks('tasks');
     grunt.registerTask('default', ['jshint']);
 };
