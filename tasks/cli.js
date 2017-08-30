@@ -1,4 +1,12 @@
-class Template {
+class TemplateWeb {
+    execute() {
+        return '';
+    }
+}
+class TemplateDesktop {
+    execute() {
+        return '';
+    }
 }
 module.exports = (grunt) => {
     var path = require('path');
@@ -11,8 +19,8 @@ module.exports = (grunt) => {
         grunt.help.usage();
         grunt.help.footer();
         if (args.length < 4) {
-            if (args[3].toString() != "web" ||
-                args[3].toString() != "desktop") {
+            if (args[3].toString() === "web" ||
+                args[3].toString() === "desktop") {
                 _pjtitle = args[3];
                 withoutFullArgs = true;
             }
@@ -22,9 +30,9 @@ module.exports = (grunt) => {
             }
         }
         let map = new Map();
-        map.set("web", new Template);
-        map.set("desktop", new Template);
-        console.log(map.get("web").);
+        map.set("web", new TemplateWeb);
+        map.set("desktop", new TemplateDesktop);
+        console.log(map.get("web")); //.execute
         if (args[3] != "" && withoutFullArgs == true) {
             console.log(" LOG: template name: " + "'" + args[3] + "'");
             _pjtitle = args[3];

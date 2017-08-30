@@ -4,11 +4,19 @@ interface IGrunt {
 }
 
 interface ITemplate {
-    execute(): void;
+    execute(): string;
 }
 
-class Template implements ITemplate {
-    execute;
+class TemplateWeb implements ITemplate {
+    execute() {
+        return '';
+    }
+}
+
+class TemplateDesktop implements ITemplate {
+    execute() {
+        return '';
+    }
 }
 
 module.exports = (grunt: IGrunt) => {
@@ -27,8 +35,8 @@ module.exports = (grunt: IGrunt) => {
         grunt.help.footer();
 
         if (args.length < 4) {
-            if (args[3].toString() != "web" ||
-                args[3].toString() != "desktop") {
+            if (args[3].toString() === "web" ||
+                args[3].toString() === "desktop") {
 
                 _pjtitle = args[3];
                 withoutFullArgs = true;
@@ -40,10 +48,10 @@ module.exports = (grunt: IGrunt) => {
         }
 
         let map = new Map<string, ITemplate>();
-        map.set("web", new Template);
-        map.set("desktop", new Template);
+        map.set("web", new TemplateWeb);
+        map.set("desktop", new TemplateDesktop);
         
-        console.log(map.get("web").);
+        console.log(map.get("web"));    //.execute
 
         if (args[3] != "" && withoutFullArgs == true) {
             console.log(" LOG: template name: " + "'" + args[3] + "'");
