@@ -18,7 +18,7 @@ grunt.help.queue = [
 ];
 
 grunt.help.header = function() {
-  grunt.log.header("\n GL-CLI HELP: ");
+  grunt.log.header("\n gl-cli: ");
   grunt.log.writeln("\n grunt plugin to easily generate predefined templates for different type of works.");
 };
 
@@ -43,7 +43,8 @@ grunt.help.log = function() {
 
 grunt.options = {
   gruntfile : asset("Gruntfile.js"),
-  cwd : process.cwd()
+  cwd : process.cwd(),
+  pjtitle: process.argv[3]
 }
 
 grunt.cli(grunt.options);

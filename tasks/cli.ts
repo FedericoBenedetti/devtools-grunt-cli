@@ -10,7 +10,7 @@ interface ITemplate {
 class TemplateWeb implements ITemplate {
     execute() {
         let tasks: string[] = [];
-        
+
         tasks.push('shell:web');
         return tasks;
     }
@@ -26,10 +26,10 @@ class TemplateDesktop implements ITemplate {
 module.exports = (grunt: IGrunt) => {
 
     var path = require('path');
-    
+
     var _pjtitle: string;
     var _map: Map<string, ITemplate>;
-    
+
     grunt.template.addDelimiters('init', '{%', '%}');
 
 
@@ -39,12 +39,12 @@ module.exports = (grunt: IGrunt) => {
         if (args.length < 4 || args[2] == "help" || args[2] == "h") {
             grunt.help.queue.forEach(helpMsg => {
                 grunt.help[helpMsg]();
-            });       
+            });
             process.exit();
         }
 
         grunt.help.log();
-        
+
         _map = new Map<string, ITemplate>();
         _map.set("web", new TemplateWeb);
         _map.set("desktop", new TemplateDesktop);
