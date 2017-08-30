@@ -1,20 +1,40 @@
-class TemplateWeb {
-    execute() {
-        let tasks = [];
-        tasks.push('unzip:unzip_template');
-        tasks.push('move:web');
-        return tasks;
-    }
-}
-class TemplateDesktop {
-    execute() {
-        let tasks = [];
-        tasks.push('unzip:unzip_template');
-        tasks.push('move:desktop');
-        return tasks;
-    }
-}
-module.exports = (grunt) => {
+"use strict";
+module.exports = function (grunt) {
+    var GlMap = (function () {
+        function GlMap() {
+            this.keys = new Array();
+            this.mapObj = {};
+        }
+        GlMap.prototype.set = function (key, value) {
+            this.mapObj[key] = value;
+        };
+        GlMap.prototype.get = function (key) {
+            return this.mapObj[key];
+        };
+        return GlMap;
+    }());
+    var TemplateWeb = (function () {
+        function TemplateWeb() {
+        }
+        TemplateWeb.prototype.execute = function () {
+            var tasks = [];
+            tasks.push('unzip:unzip_template');
+            tasks.push('move:web');
+            return tasks;
+        };
+        return TemplateWeb;
+    }());
+    var TemplateDesktop = (function () {
+        function TemplateDesktop() {
+        }
+        TemplateDesktop.prototype.execute = function () {
+            var tasks = [];
+            tasks.push('unzip:unzip_template');
+            tasks.push('move:desktop');
+            return tasks;
+        };
+        return TemplateDesktop;
+    }());
     var path = require('path');
     var _map;
     var _taskToExecute = [];
@@ -22,13 +42,13 @@ module.exports = (grunt) => {
     grunt.registerTask('generate-folder', 'Easily generate predefined templates for different type of works.', function () {
         var args = process.argv;
         if (args.length < 4 || args[2] == "help" || args[2] == "h") {
-            grunt.help.queue.forEach(helpMsg => {
+            grunt.help.queue.forEach(function (helpMsg) {
                 grunt.help[helpMsg]();
             });
             process.exit();
         }
         grunt.help.log();
-        _map = new Map();
+        _map = new GlMap();
         _map.set("web", new TemplateWeb);
         _map.set("desktop", new TemplateDesktop);
         if (args.length < 4) {

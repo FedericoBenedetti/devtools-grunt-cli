@@ -5,7 +5,7 @@
 
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
-    grunt.task.loadTasks('tasks');
+    grunt.task.loadTasks(grunt.options.asset('tasks'));
 
     var _current_dir = grunt.options.cwd;
     var _project_title = grunt.options.pjtitle;

@@ -42,7 +42,9 @@ grunt.help.log = function () {
 grunt.options = {
   gruntfile: asset("Gruntfile.js"),
   cwd: process.cwd(),
-  pjtitle: process.argv[3]
+  pjtitle: process.argv[3],
+  verbose: false,
+  asset: asset
 }
 
 grunt.cli(grunt.options);
