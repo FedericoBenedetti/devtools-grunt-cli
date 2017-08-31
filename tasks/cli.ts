@@ -5,21 +5,21 @@ interface IGrunt {
 
 module.exports = (grunt: IGrunt) => {
 
-    class GlMap<TKey,TValue>{
-        keys:Array<TKey>
+    class GlMap<TKey, TValue>{
+        keys: Array<TKey>;
 
-        mapObj:any
+        mapObj: any;
 
-        constructor(){
+        constructor() {
             this.keys = new Array<TKey>();
             this.mapObj = {};
         }
 
-        set(key: TKey, value:TValue){
-            this.mapObj[key] = value
+        set(key: TKey, value: TValue) {
+            this.mapObj[key] = value;
         }
 
-        get(key: TKey): TValue{
+        get(key: TKey): TValue {
             return this.mapObj[key];
         }
     }
@@ -28,36 +28,36 @@ module.exports = (grunt: IGrunt) => {
     interface ITemplate {
         execute(): string[];
     }
-    
+
     class TemplateWeb implements ITemplate {
         execute() {
             let tasks: string[] = [];
-            tasks.push('unzip:unzip_template');
-            tasks.push('move:web');
+            tasks.push("unzip:unzip_template");
+            tasks.push("move:web");
             return tasks;
         }
     }
-    
+
     class TemplateDesktop implements ITemplate {
         execute() {
             let tasks: string[] = [];
-            tasks.push('unzip:unzip_template');
-            tasks.push('move:desktop');
+            tasks.push("unzip:unzip_template");
+            tasks.push("move:desktop");
             return tasks;
         }
     }
-    
 
-    var path = require('path');
+
+    var path = require("path");
 
     var _map: GlMap<string, ITemplate>;
     var _taskToExecute: string[] = [];
 
 
-    grunt.template.addDelimiters('init', '{%', '%}');
+    grunt.template.addDelimiters("init", "{%", "%}");
 
 
-    grunt.registerTask('generate-folder', 'Easily generate predefined templates for different type of works.', function () {
+    grunt.registerTask("generate-folder", "Easily generate predefined templates for different type of works.", function () {
         var args = process.argv;
 
         if (args.length < 4 || args[2] == "help" || args[2] == "h") {
@@ -67,7 +67,7 @@ module.exports = (grunt: IGrunt) => {
             process.exit();
         }
 
-        grunt.help.log();        
+        grunt.help.log();
 
         _map = new GlMap<string, ITemplate>();
         _map.set("web", new TemplateWeb);
@@ -85,7 +85,7 @@ module.exports = (grunt: IGrunt) => {
 
             } else if (!args[2]) {
 
-                console.log("\n LOG: No args detected, using 'web' as default template. ")
+                console.log("\n LOG: No args detected, using 'web' as default template. ");
                 executeTasks("web");
             }
 
