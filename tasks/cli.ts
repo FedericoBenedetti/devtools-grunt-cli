@@ -57,7 +57,7 @@ module.exports = (grunt: IGrunt) => {
     grunt.template.addDelimiters("init", "{%", "%}");
 
 
-    grunt.registerTask("generate-folder", "Easily generate predefined templates for different type of works.", function () {
+    grunt.registerTask("generate-template", "Easily generate predefined templates for different type of works.", function () {
         var args = process.argv;
 
         grunt.help.log();

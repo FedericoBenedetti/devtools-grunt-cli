@@ -8,7 +8,7 @@ var asset = path.resolve.bind(null, __dirname, "..");
 
 var grunt = require("grunt");
 
-grunt.cli.tasks = ["generate-folder"];
+grunt.cli.tasks = ["generate-template"];
 grunt.help.queue = [
   "header",
   "usage",
@@ -24,10 +24,12 @@ grunt.help.usage = function () {
   grunt.log.header(" Usage: ");
   grunt.log.writeln("\n " + path.basename(process.argv[1]) + " [options] [template name]");
   grunt.log.header("\n Options available: ");
-  grunt.log.writeln("\n web \t\t-: web template");
-  grunt.log.writeln(" desktop \t-: desktop template");
-  grunt.log.writeln(" help/h \t-: help");
-
+  grunt.log.writeln("\n web \t\t-: create a default template for web based applications.");
+  grunt.log.writeln(" desktop \t-: create a default template for desktop based applications.");
+  grunt.log.writeln(" h|help \t-: show a quick guide.");
+  grunt.log.writeln(" v|verbose \t-: runs the cli in verbose mode.\n");
+  grunt.log.writeln("If you decide to write only the template name, the cli will use `web` as default template. ");
+  grunt.log.writeln("If you decice to don't write the name of the template, `default` will be used instead as folders/filess names.");
 };
 
 grunt.help.footer = function () {
