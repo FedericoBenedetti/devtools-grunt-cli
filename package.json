@@ -1,5 +1,5 @@
 {
-  "name": "@IT/gl-cli",
+  "name": "@IT/gl-grunt-project-cli",
   "description": "grunt plugin to easily generate predefined templates for different type of works",
   "version": "0.1.0",
   "homepage": "https://git.loccioni.com/IT/devtools/gl-grunt-project-cli",
@@ -20,8 +20,6 @@
   "dependencies": {
     "grunt": "1.0.1",
     "grunt-cli": "^1.2.0",
-    "grunt-contrib-jshint": "1.1.0",
-    "grunt-contrib-nodeunit": "1.0.0",
     "load-grunt-tasks": "^3.5.2",
     "grunt-git": "^1.0.6",
     "grunt-move": "^0.1.2",
@@ -29,6 +27,8 @@
     "grunt-zip": "^0.17.1"
   },
   "devDependencies": {
+    "grunt-contrib-jshint": "1.1.0",
+    "grunt-contrib-nodeunit": "1.0.0",
     "@types/grunt": "^0.4.22",
     "@types/node": "^4.0.0",
     "typescript": "2.1.6"
