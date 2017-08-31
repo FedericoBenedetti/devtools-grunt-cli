@@ -50,10 +50,6 @@ module.exports = (grunt: IGrunt) => {
 
     var path = require("path");
 
-
-    grunt.template.addDelimiters("init", "{%", "%}");
-
-
     grunt.registerTask("generate-template", "Easily generate predefined templates for different type of works.", function () {
         grunt.help.log();
         let _map = new GlMap<string, ITemplate>();

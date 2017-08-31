@@ -41,9 +41,10 @@ grunt.help.log = function () {
   grunt.log.header("\n Logs: ");
 }
 
-
-
 var args_logic = function () {
+  var args = process.argv;
+  var titleIsSetted = false;
+
   var options = {
     gruntfile: asset("Gruntfile.js"),
     cwd: process.cwd(),
@@ -53,25 +54,28 @@ var args_logic = function () {
     asset: asset
   }
 
-  var args = process.argv;
-  args.forEach(function (arg) {
+  args.forEach(arg => {
     if (arg === "h" || arg === "help") {
-      grunt.help.queue.forEach(helpMsg => {
-        grunt.help[helpMsg]();
-      });
+      help();
       process.exit();
     }
 
-    if (arg != "web" ||
-      arg != "desktop" ||
-      arg != "v" ||
-      arg != "verbose") {
+    if (arg != "web" &&
+      arg != "desktop" &&
+      arg != "v" &&
+      arg != "verbose" &&
+      arg.indexOf("node") == -1 &&
+      arg.indexOf("gl-cli") == -1 &&
+      titleIsSetted == false &&
+      arg != "help") {
 
       options.pjtitle = arg;
+      titleIsSetted = true;
       grunt.log.writeln("\n LOG: template name: " + "'" + arg + "'");
     }
 
     if (arg === "desktop") {
+
       options.type = arg;
       grunt.log.writeln("\n LOG: type of task: '" + arg + "'");
     }
@@ -85,9 +89,20 @@ var args_logic = function () {
 
   });
 
+  if (titleIsSetted == false) {
+    grunt.log.warn("\n WARNING: title not found, aborting. ");
+    help();
+    process.exit();
+  }
+
   return options;
 }
 
+var help = function () {
+  grunt.help.queue.forEach(helpMsg => {
+    grunt.help[helpMsg]();
+  });
+}
 
 grunt.options = args_logic();
 grunt.cli(grunt.options);
