@@ -32,8 +32,8 @@ module.exports = (grunt: IGrunt) => {
     class TemplateWeb implements ITemplate {
         getTasksToExecute() {
             let tasks: string[] = [];
-            tasks.push("unzip:unzip_template");
             tasks.push("move:web");
+            tasks.push("json_version");
             return tasks;
         }
     }
@@ -41,8 +41,8 @@ module.exports = (grunt: IGrunt) => {
     class TemplateDesktop implements ITemplate {
         getTasksToExecute() {
             let tasks: string[] = [];
-            tasks.push("unzip:unzip_template");
             tasks.push("move:desktop");
+            tasks.push("json_version");
             return tasks;
         }
     }
@@ -54,7 +54,10 @@ module.exports = (grunt: IGrunt) => {
         grunt.help.log();
         let _map = new GlMap<string, ITemplate>();
         _map.set("web", new TemplateWeb);
-        _map.set("desktop", new TemplateDesktop);        
+        _map.set("desktop", new TemplateDesktop);
+
+        grunt.task.run("gitclone:update", "clean:delete_git_folder");
+
         grunt.task.run(_map.get(<string>grunt.option("type")).getTasksToExecute());
     });
 
