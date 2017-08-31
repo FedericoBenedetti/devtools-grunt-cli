@@ -37,5 +37,5 @@ Options availables are:
 ## Others
 If you decide to write only the template name, the cli will use `web` as default template.
 
-If you decice to don't write the name of the template, `default` will be used instead as folders/filess names.
+If you decice to don't write the name of the template, `default` will be used instead as folders/files names.
 
