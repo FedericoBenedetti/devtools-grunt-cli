@@ -2,7 +2,6 @@
 
 // Get working directory: <%= grunt.options.cwd %>
 
-
 module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-git");
     grunt.loadNpmTasks("grunt-move");
@@ -10,9 +9,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-zip");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.task.loadTasks(grunt.options.asset("tasks"));
-
-    var _current_dir = grunt.options.cwd;
-    var _project_title = grunt.options.pjtitle;
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("./package.json"),
@@ -52,6 +48,25 @@ module.exports = function (grunt) {
         clean: {
             delete_git_folder: ["<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\.git"]
         }
+
+    });
+
+    grunt.registerTask("json_version", function() {
+
+        var package_JSON = grunt.options.cwd + "\\" + grunt.options.pjtitle + "\\app\\package.json";
+        var JSONFile = grunt.file.readJSON(package_JSON);
+
+        for (var prop in JSONFile) {
+            if (prop === "name") {
+                JSONFile[prop] = grunt.options.pjtitle;
+            } else if (prop === "version") {
+                JSONFile[prop] = "1.0.0";
+            }
+        }
+
+        grunt.file.write(package_JSON, JSON.stringify(JSONFile, null));
+        
+        
 
     });
 

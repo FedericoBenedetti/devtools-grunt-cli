@@ -33,6 +33,7 @@ module.exports = (grunt: IGrunt) => {
         getTasksToExecute() {
             let tasks: string[] = [];
             tasks.push("move:web");
+            tasks.push("json_version");
             return tasks;
         }
     }
@@ -41,6 +42,7 @@ module.exports = (grunt: IGrunt) => {
         getTasksToExecute() {
             let tasks: string[] = [];
             tasks.push("move:desktop");
+            tasks.push("json_version");
             return tasks;
         }
     }
@@ -55,7 +57,7 @@ module.exports = (grunt: IGrunt) => {
         _map.set("desktop", new TemplateDesktop);
 
         grunt.task.run("gitclone:update", "clean:delete_git_folder");
-        
+
         grunt.task.run(_map.get(<string>grunt.option("type")).getTasksToExecute());
     });
 
