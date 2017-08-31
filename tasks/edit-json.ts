@@ -1,5 +1,5 @@
 module.exports = (grunt: IGrunt) => {
-    grunt.registerTask("json_version", function () {
+    grunt.registerTask("json_version", () => {
 
         var package_JSON = grunt.option("cwd") + "\\" + grunt.option("pjtitle") + "\\app\\package.json";
         var JSONFile = grunt.file.readJSON(package_JSON);
@@ -13,8 +13,5 @@ module.exports = (grunt: IGrunt) => {
         }
 
         grunt.file.write(package_JSON, JSON.stringify(JSONFile, null, 2));
-
-
-
     });
 }
