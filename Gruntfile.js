@@ -51,26 +51,5 @@ module.exports = function (grunt) {
                 force: true
             }
         }
-
     });
-
-    grunt.registerTask("json_version", function () {
-
-        var package_JSON = grunt.options.cwd + "\\" + grunt.options.pjtitle + "\\app\\package.json";
-        var JSONFile = grunt.file.readJSON(package_JSON);
-
-        for (var prop in JSONFile) {
-            if (prop === "name") {
-                JSONFile[prop] = grunt.options.pjtitle;
-            } else if (prop === "version") {
-                JSONFile[prop] = "1.0.0";
-            }
-        }
-
-        grunt.file.write(package_JSON, JSON.stringify(JSONFile, null, 2));
-
-
-
-    });
-
 };
