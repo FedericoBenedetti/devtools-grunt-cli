@@ -3,61 +3,59 @@ interface IGrunt {
     registerInitTask(taskname: string, description: string, taskFunction: (this: grunt.task.ITask, ...args: any[]) => void)
 }
 
-interface ITemplate {
-    execute(): string;
-}
-
-class TemplateWeb implements ITemplate {
-    execute() {
-        return '';
-    }
-}
-
-class TemplateDesktop implements ITemplate {
-    execute() {
-        return '';
-    }
-}
-
 module.exports = (grunt: IGrunt) => {
 
-    var path = require('path');
+    class GlMap<TKey, TValue>{
+        keys: Array<TKey>;
 
-    grunt.template.addDelimiters('init', '{%', '%}');
+        mapObj: any;
 
-    grunt.registerInitTask('init', 'Easily generate predefined templates for different type of works.', function () {
-        var args = process.argv;
-        var withoutFullArgs = false;
-        var _pjtitle;
-
-        grunt.help.header();
-        grunt.help.usage();
-        grunt.help.footer();
-
-        if (args.length < 4) {
-            if (args[3].toString() === "web" ||
-                args[3].toString() === "desktop") {
-
-                _pjtitle = args[3];
-                withoutFullArgs = true;
-            } else {
-
-                console.log("\n\n WARNING: Arguments expected: 2. \n");
-                process.exit();
-            }
+        constructor() {
+            this.keys = new Array<TKey>();
+            this.mapObj = {};
         }
 
-        let map = new Map<string, ITemplate>();
-        map.set("web", new TemplateWeb);
-        map.set("desktop", new TemplateDesktop);
-        
-        console.log(map.get("web"));    //.execute
-
-        if (args[3] != "" && withoutFullArgs == true) {
-            console.log(" LOG: template name: " + "'" + args[3] + "'");
-            _pjtitle = args[3];
+        set(key: TKey, value: TValue) {
+            this.mapObj[key] = value;
         }
 
+        get(key: TKey): TValue {
+            return this.mapObj[key];
+        }
+    }
+
+
+    interface ITemplate {
+        getTasksToExecute(): string[];
+    }
+
+    class TemplateWeb implements ITemplate {
+        getTasksToExecute() {
+            let tasks: string[] = [];
+            tasks.push("unzip:unzip_template");
+            tasks.push("move:web");
+            return tasks;
+        }
+    }
+
+    class TemplateDesktop implements ITemplate {
+        getTasksToExecute() {
+            let tasks: string[] = [];
+            tasks.push("unzip:unzip_template");
+            tasks.push("move:desktop");
+            return tasks;
+        }
+    }
+
+
+    var path = require("path");
+
+    grunt.registerTask("generate-template", "Easily generate predefined templates for different type of works.", function () {
+        grunt.help.log();
+        let _map = new GlMap<string, ITemplate>();
+        _map.set("web", new TemplateWeb);
+        _map.set("desktop", new TemplateDesktop);        
+        grunt.task.run(_map.get(<string>grunt.option("type")).getTasksToExecute());
     });
 
 };

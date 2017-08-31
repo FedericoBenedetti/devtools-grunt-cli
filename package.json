@@ -1,37 +1,37 @@
 {
-  "name": "gl-grunt-project-cli",
+  "name": "@IT/gl-grunt-project-cli",
   "description": "grunt plugin to easily generate predefined templates for different type of works",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "homepage": "https://git.loccioni.com/IT/devtools/gl-grunt-project-cli",
   "author": {
-    "name": "Federico Benedetti (classev@loccioni.com, fede.benedetti9@gmail.com)",
+    "name": "Federico Benedetti (fede.benedetti9@gmail.com, classev@loccioni.com)",
     "url": "https://github.com/FedericoBenedetti"
   },
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://git.loccioni.com/IT/devtools/gl-grunt-project-cli"
   },
   "preferGlobal": true,
-  "bin": "bin/grunt-init",
+  "bin": {
+    "gl-cli": "bin/gl-cli"
+  },
   "engines": {
     "node": ">= 0.8.0"
   },
   "dependencies": {
-    "@types/grunt": "^0.4.22",
-    "@types/node": "^8.0.25"
-  },
-  "devDependencies": {
     "grunt": "1.0.1",
     "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "1.0.0",
-    "grunt-contrib-compress": "1.3.0",
-    "grunt-contrib-copy": "1.0.0",
+    "grunt-git": "^1.0.6",
+    "grunt-move": "^0.1.2",
+    "grunt-shell": "2.1.0",
+    "grunt-zip": "^0.17.1"
+  },
+  "devDependencies": {
     "grunt-contrib-jshint": "1.1.0",
     "grunt-contrib-nodeunit": "1.0.0",
-    "grunt-git": "^1.0.6",
-    "grunt-shell": "2.1.0",
-    "hooker": "^0.2.3",
-    "load-grunt-tasks": "^3.5.2",
+    "@types/grunt": "^0.4.22",
+    "@types/node": "^4.0.0",
     "typescript": "2.1.6"
   },
   "keywords": [

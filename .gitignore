@@ -1,3 +1,5 @@
 node_modules
 tasks/*.js
 tasks/*.*.map
+out/
+bin/test
