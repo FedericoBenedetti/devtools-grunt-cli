@@ -1,7 +1,7 @@
 {
   "name": "@IT/gl-grunt-project-cli",
   "description": "grunt plugin to easily generate predefined templates for different type of works",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://git.loccioni.com/IT/devtools/gl-grunt-project-cli",
   "author": {
     "name": "Federico Benedetti (fede.benedetti9@gmail.com, classev@loccioni.com)",
