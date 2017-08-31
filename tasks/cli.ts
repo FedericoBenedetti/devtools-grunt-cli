@@ -53,12 +53,9 @@ module.exports = (grunt: IGrunt) => {
         let _map = new GlMap<string, ITemplate>();
         _map.set("web", new TemplateWeb);
         _map.set("desktop", new TemplateDesktop);
-        
-        let updateTasks : string[] = [];
-        updateTasks.push("gitclone:update");
-        updateTasks.push("clean:delete_git_folder");
 
-        grunt.task.run(updateTasks);
+        grunt.task.run("gitclone:update", "clean:delete_git_folder");
+        
         grunt.task.run(_map.get(<string>grunt.option("type")).getTasksToExecute());
     });
 
