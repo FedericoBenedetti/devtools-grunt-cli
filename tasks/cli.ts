@@ -106,6 +106,7 @@ module.exports = (grunt: IGrunt) => {
 
     function setTitle(title: string) {
         grunt.log.writeln("\n LOG: template name: " + "'" + title + "'");
+        grunt.option("pjtitle", title);
     }
 
     function executeTasks(type: string) {

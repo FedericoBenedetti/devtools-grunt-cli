@@ -4,7 +4,10 @@
 
 
 module.exports = function (grunt) {
-    require("load-grunt-tasks")(grunt);
+    grunt.loadNpmTasks("grunt-git");
+    grunt.loadNpmTasks("grunt-move");
+    grunt.loadNpmTasks("grunt-shell");
+    grunt.loadNpmTasks("grunt-zip");
     grunt.task.loadTasks(grunt.options.asset("tasks"));
 
     var _current_dir = grunt.options.cwd;
@@ -25,21 +28,20 @@ module.exports = function (grunt) {
 
         move: {
             web: {
-                src:  _current_dir + "\\" + _project_title + "\\gui-project-template.sln",
-                dest: _current_dir + "\\" + _project_title + "\\" + _project_title + ".sln"
-
+                src:  "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\gui-project-template.sln",
+                dest: "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\<%= grunt.options.pjtitle %>.sln"
             },
 
             desktop: {
-                src:  _current_dir + "\\" + _project_title + "\\gui-project-template.sln",
-                dest: _current_dir + "\\" + _project_title + "\\" + _project_title + ".sln"
+                src:  "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\gui-project-template.sln",
+                dest: "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\<%= grunt.options.pjtitle %>.sln"
             }
         },
 
         unzip: {
             unzip_template: {
                 src: process.cwd() + "/templates/gui-project-template.zip",
-                dest: _current_dir + "/" + _project_title
+                dest: "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\"
             }
         }
 
