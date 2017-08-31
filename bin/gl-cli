@@ -39,9 +39,44 @@ grunt.help.log = function () {
   grunt.log.header("\n Logs: ");
 }
 
+args_logic = function () {
+  var args = process.argv;
+  args.forEach(function (arg) {
+    if (arg === "h" || arg === "help") {
+      grunt.help.queue.forEach(helpMsg => {
+        grunt.help[helpMsg]();
+      });
+      process.exit();
+    }
+
+    if (arg != "web" ||
+      arg != "desktop" ||
+      arg != "v" ||
+      arg != "verbose") {
+
+      grunt.option("pjtitle", arg);
+      grunt.log.writeln("\n LOG: template name: " + "'" + arg + "'");
+    }
+
+    if (arg === "desktop") {
+      grunt.option("type", "desktop");
+      grunt.log.writeln("\n LOG: type of task: '" + arg + "'");
+    }
+
+    if (arg === "v" || 
+      arg === "verbose") {
+
+      grunt.option("verbose", true);
+      grunt.log.writeln("\n LOG: executing with 'verbose' option. ");
+    }
+
+  });
+}
+
 grunt.options = {
   gruntfile: asset("Gruntfile.js"),
   cwd: process.cwd(),
+  type: "web",
   pjtitle: "default",
   verbose: false,
   asset: asset
