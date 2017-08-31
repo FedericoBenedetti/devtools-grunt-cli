@@ -26,11 +26,11 @@ module.exports = (grunt: IGrunt) => {
 
 
     interface ITemplate {
-        execute(): string[];
+        getTasksToExecute(): string[];
     }
 
     class TemplateWeb implements ITemplate {
-        execute() {
+        getTasksToExecute() {
             let tasks: string[] = [];
             tasks.push("unzip:unzip_template");
             tasks.push("move:web");
@@ -39,7 +39,7 @@ module.exports = (grunt: IGrunt) => {
     }
 
     class TemplateDesktop implements ITemplate {
-        execute() {
+        getTasksToExecute() {
             let tasks: string[] = [];
             tasks.push("unzip:unzip_template");
             tasks.push("move:desktop");
@@ -50,29 +50,16 @@ module.exports = (grunt: IGrunt) => {
 
     var path = require("path");
 
-    var _map: GlMap<string, ITemplate>;
-    var _taskToExecute: string[] = [];
-
 
     grunt.template.addDelimiters("init", "{%", "%}");
 
 
     grunt.registerTask("generate-template", "Easily generate predefined templates for different type of works.", function () {
-        var args = process.argv;
-
         grunt.help.log();
-
-        _map = new GlMap<string, ITemplate>();
+        let _map = new GlMap<string, ITemplate>();
         _map.set("web", new TemplateWeb);
-        _map.set("desktop", new TemplateDesktop);
-
-        executeTasks();
+        _map.set("desktop", new TemplateDesktop);        
+        grunt.task.run(_map.get(<string>grunt.option("type")).getTasksToExecute());
     });
 
-    function executeTasks() {
-
-        _taskToExecute = _map.get(grunt.option("type")).execute();
-
-        grunt.task.run(_taskToExecute);
-    }
 };

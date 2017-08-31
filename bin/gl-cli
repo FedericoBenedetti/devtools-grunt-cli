@@ -41,7 +41,18 @@ grunt.help.log = function () {
   grunt.log.header("\n Logs: ");
 }
 
-args_logic = function () {
+
+
+var args_logic = function () {
+  var options = {
+    gruntfile: asset("Gruntfile.js"),
+    cwd: process.cwd(),
+    type: "web",
+    pjtitle: "default",
+    verbose: false,
+    asset: asset
+  }
+
   var args = process.argv;
   args.forEach(function (arg) {
     if (arg === "h" || arg === "help") {
@@ -56,32 +67,27 @@ args_logic = function () {
       arg != "v" ||
       arg != "verbose") {
 
-      grunt.option("pjtitle", arg);
+      options.pjtitle = arg;
       grunt.log.writeln("\n LOG: template name: " + "'" + arg + "'");
     }
 
     if (arg === "desktop") {
-      grunt.option("type", "desktop");
+      options.type = arg;
       grunt.log.writeln("\n LOG: type of task: '" + arg + "'");
     }
 
     if (arg === "v" ||
       arg === "verbose") {
 
-      grunt.option("verbose", true);
+      options.verbose = true;
       grunt.log.writeln("\n LOG: executing with 'verbose' option. ");
     }
 
   });
+
+  return options;
 }
 
-grunt.options = {
-  gruntfile: asset("Gruntfile.js"),
-  cwd: process.cwd(),
-  type: "web",
-  pjtitle: "default",
-  verbose: false,
-  asset: asset
-}
 
+grunt.options = args_logic();
 grunt.cli(grunt.options);
