@@ -17,7 +17,7 @@ Now you can start using the cli to create templates!
 In order to do so you can type the following:
 
 ``` shell
-gl-cli [options] [template-name]
+gl-cli [option] [template-name]
 ```
 
 ## Options
