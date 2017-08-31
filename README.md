@@ -2,7 +2,7 @@
 Now you need to install the plugin CLI package, to set it globally remember `-g` at the end of the line: 
 
 ```shell
-npm install @IT/gl-cli -g
+npm install @IT/gl-grunt-project-cli -g
 ```
 
 If any error related to NPM registry shows up, type this into the cmd:
