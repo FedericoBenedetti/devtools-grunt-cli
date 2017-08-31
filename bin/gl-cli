@@ -63,7 +63,7 @@ args_logic = function () {
       grunt.log.writeln("\n LOG: type of task: '" + arg + "'");
     }
 
-    if (arg === "v" || 
+    if (arg === "v" ||
       arg === "verbose") {
 
       grunt.option("verbose", true);

@@ -13,7 +13,9 @@
     "url": "https://git.loccioni.com/IT/devtools/gl-grunt-project-cli"
   },
   "preferGlobal": true,
-  "bin": {"gl-cli" : "bin/gl-cli"},
+  "bin": {
+    "gl-cli": "bin/gl-cli"
+  },
   "engines": {
     "node": ">= 0.8.0"
   },

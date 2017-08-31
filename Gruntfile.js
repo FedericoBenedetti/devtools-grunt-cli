@@ -28,12 +28,12 @@ module.exports = function (grunt) {
 
         move: {
             web: {
-                src:  "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\gui-project-template.sln",
+                src: "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\gui-project-template.sln",
                 dest: "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\<%= grunt.options.pjtitle %>.sln"
             },
 
             desktop: {
-                src:  "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\gui-project-template.sln",
+                src: "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\gui-project-template.sln",
                 dest: "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\<%= grunt.options.pjtitle %>.sln"
             }
         },
