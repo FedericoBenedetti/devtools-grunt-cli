@@ -46,12 +46,15 @@ module.exports = function (grunt) {
         },
 
         clean: {
-            delete_git_folder: ["<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\.git"]
+            delete_git_folder: ["<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\.git"],
+            options: {
+                force: true
+            }
         }
 
     });
 
-    grunt.registerTask("json_version", function() {
+    grunt.registerTask("json_version", function () {
 
         var package_JSON = grunt.options.cwd + "\\" + grunt.options.pjtitle + "\\app\\package.json";
         var JSONFile = grunt.file.readJSON(package_JSON);
@@ -64,9 +67,9 @@ module.exports = function (grunt) {
             }
         }
 
-        grunt.file.write(package_JSON, JSON.stringify(JSONFile, null));
-        
-        
+        grunt.file.write(package_JSON, JSON.stringify(JSONFile, null, 2));
+
+
 
     });
 
