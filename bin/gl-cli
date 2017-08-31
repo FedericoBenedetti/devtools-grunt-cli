@@ -8,7 +8,7 @@ var asset = path.resolve.bind(null, __dirname, "..");
 
 var grunt = require("grunt");
 
-grunt.cli.tasks = ["generate-folder"];
+grunt.cli.tasks = ["generate-template"];
 grunt.help.queue = [
   "header",
   "usage",
@@ -24,10 +24,12 @@ grunt.help.usage = function () {
   grunt.log.header(" Usage: ");
   grunt.log.writeln("\n " + path.basename(process.argv[1]) + " [options] [template name]");
   grunt.log.header("\n Options available: ");
-  grunt.log.writeln("\n web \t\t-: web template");
-  grunt.log.writeln(" desktop \t-: desktop template");
-  grunt.log.writeln(" help/h \t-: help");
-
+  grunt.log.writeln("\n web \t\t-: create a default template for web based applications.");
+  grunt.log.writeln(" desktop \t-: create a default template for desktop based applications.");
+  grunt.log.writeln(" h|help \t-: show a quick guide.");
+  grunt.log.writeln(" v|verbose \t-: runs the cli in verbose mode.\n");
+  grunt.log.writeln("If you decide to write only the template name, the cli will use `web` as default template. ");
+  grunt.log.writeln("If you decice to don't write the name of the template, `default` will be used instead as folders/files name.");
 };
 
 grunt.help.footer = function () {
@@ -39,12 +41,68 @@ grunt.help.log = function () {
   grunt.log.header("\n Logs: ");
 }
 
-grunt.options = {
-  gruntfile: asset("Gruntfile.js"),
-  cwd: process.cwd(),
-  pjtitle: process.argv[3],
-  verbose: false,
-  asset: asset
+var args_logic = function () {
+  var args = process.argv;
+  var titleIsSetted = false;
+
+  var options = {
+    gruntfile: asset("Gruntfile.js"),
+    cwd: process.cwd(),
+    type: "web",
+    pjtitle: "default",
+    verbose: false,
+    asset: asset
+  }
+
+  args.forEach(arg => {
+    if (arg === "h" || arg === "help") {
+      help();
+      process.exit();
+    }
+
+    if (arg != "web" &&
+      arg != "desktop" &&
+      arg != "v" &&
+      arg != "verbose" &&
+      arg.indexOf("node") == -1 &&
+      arg.indexOf("gl-cli") == -1 &&
+      titleIsSetted == false &&
+      arg != "help") {
+
+      options.pjtitle = arg;
+      titleIsSetted = true;
+      grunt.log.writeln("\n LOG: template name: " + "'" + arg + "'");
+    }
+
+    if (arg === "desktop") {
+
+      options.type = arg;
+      grunt.log.writeln("\n LOG: type of task: '" + arg + "'");
+    }
+
+    if (arg === "v" ||
+      arg === "verbose") {
+
+      options.verbose = true;
+      grunt.log.writeln("\n LOG: executing with 'verbose' option. ");
+    }
+
+  });
+
+  if (titleIsSetted == false) {
+    grunt.log.warn("\n WARNING: title not found, aborting. ");
+    help();
+    process.exit();
+  }
+
+  return options;
 }
 
+var help = function () {
+  grunt.help.queue.forEach(helpMsg => {
+    grunt.help[helpMsg]();
+  });
+}
+
+grunt.options = args_logic();
 grunt.cli(grunt.options);

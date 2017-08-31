@@ -1,8 +1,8 @@
 ## Download CLI
-Now you need to install the plugin CLI package, to set it globally remember `-g` at the end of the line: 
+Now you need to install the plugin CLI package, to set it globally remember to write `-g` : 
 
 ```shell
-npm install @IT/gl-grunt-project-cli -g
+npm install -g @IT/gl-grunt-project-cli
 ```
 
 If any error related to NPM registry shows up, type this into the cmd:
@@ -37,10 +37,5 @@ Options availables are:
 ## Others
 If you decide to write only the template name, the cli will use `web` as default template.
 
-`verbose` must be written as first argument:
+If you decice to don't write the name of the template, `default` will be used instead as folders/files name.
 
-``` shell
-gl-cli v web test
-```
-
-It will run the cli in verbose mode.

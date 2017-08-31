@@ -26,11 +26,11 @@ module.exports = (grunt: IGrunt) => {
 
 
     interface ITemplate {
-        execute(): string[];
+        getTasksToExecute(): string[];
     }
 
     class TemplateWeb implements ITemplate {
-        execute() {
+        getTasksToExecute() {
             let tasks: string[] = [];
             tasks.push("unzip:unzip_template");
             tasks.push("move:web");
@@ -39,7 +39,7 @@ module.exports = (grunt: IGrunt) => {
     }
 
     class TemplateDesktop implements ITemplate {
-        execute() {
+        getTasksToExecute() {
             let tasks: string[] = [];
             tasks.push("unzip:unzip_template");
             tasks.push("move:desktop");
@@ -50,70 +50,12 @@ module.exports = (grunt: IGrunt) => {
 
     var path = require("path");
 
-    var _map: GlMap<string, ITemplate>;
-    var _taskToExecute: string[] = [];
-
-
-    grunt.template.addDelimiters("init", "{%", "%}");
-
-
-    grunt.registerTask("generate-folder", "Easily generate predefined templates for different type of works.", function () {
-        var args = process.argv;
-
+    grunt.registerTask("generate-template", "Easily generate predefined templates for different type of works.", function () {
         grunt.help.log();
-
-        _map = new GlMap<string, ITemplate>();
+        let _map = new GlMap<string, ITemplate>();
         _map.set("web", new TemplateWeb);
-        _map.set("desktop", new TemplateDesktop);
-
-        if (args.length < 4) {
-            if (args[2] == "help" || args[2] == "h") {
-                grunt.help.queue.forEach(helpMsg => {
-                    grunt.help[helpMsg]();
-                });
-                process.exit();
-
-            } else if (args[2] != "web" ||
-                args[2] != "desktop") {
-
-                grunt.log.writeln("\n LOG: 1 argument detected, using it as a title. ");
-                setTitle(args[2]);
-
-                grunt.log.writeln("\n LOG: using 'web' as default template. ")
-                executeTasks("web");
-
-            } else if (!args[2]) {
-
-                grunt.log.writeln("\n LOG: No args detected, using 'web' as default template. ");
-                executeTasks("web");
-            }
-
-        } else if (args.length == 4) {
-            setTitle(args[3]);
-            executeTasks(args[2]);
-        } else if (args.length > 4) {
-            if (args[2] == "verbose" || args[2] == "v") {
-                grunt.option("verbose", true);
-
-                grunt.log.writeln("\n LOG: verbose detected. ");
-
-                setTitle(args[4]);
-                executeTasks(args[3]);
-            }
-        }
-
+        _map.set("desktop", new TemplateDesktop);        
+        grunt.task.run(_map.get(<string>grunt.option("type")).getTasksToExecute());
     });
 
-    function setTitle(title: string) {
-        grunt.log.writeln("\n LOG: template name: " + "'" + title + "'");
-    }
-
-    function executeTasks(type: string) {
-        grunt.log.writeln("\n LOG: type of task: '" + type + "'");
-
-        _taskToExecute = _map.get(type).execute();
-        grunt.log.writeln("\n LOG: command that is being executed: " + _taskToExecute);
-
-        grunt.task.run(_taskToExecute);
-    }
 };
