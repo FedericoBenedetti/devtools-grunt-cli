@@ -9,6 +9,7 @@ var asset = path.resolve.bind(null, __dirname, "..");
 var grunt = require("grunt");
 
 grunt.cli.tasks = ["generate-template"];
+
 grunt.help.queue = [
   "header",
   "usage",

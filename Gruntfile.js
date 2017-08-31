@@ -8,6 +8,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-move");
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-zip");
+    grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.task.loadTasks(grunt.options.asset("tasks"));
 
     var _current_dir = grunt.options.cwd;
@@ -38,14 +39,20 @@ module.exports = function (grunt) {
             }
         },
 
-        unzip: {
-            unzip_template: {
-                src: process.cwd() + "/templates/gui-project-template.zip",
-                dest: "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\"
+        gitclone: {
+            update: {
+                options: {
+                    repository: "https://git.loccioni.com/IT/gui-project-template",
+                    branch: "master",
+                    directory: "<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\"
+                }
             }
+        },
+
+        clean: {
+            delete_git_folder: ["<%= grunt.options.cwd %>\\<%= grunt.options.pjtitle %>\\.git"]
         }
 
     });
 
-    grunt.registerTask("default", ["jshint"]);
 };
